@@ -1,72 +1,34 @@
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
-const posts = [
-    {
-        id: 1,
-        title: "Another Way To Love",
-        subtitle: "How to make the most of any relationships",
-        author: {
-            name: "Jon Lecun",
-            id: 1
-        },
-        body: `Assertive communication helps make your point more clearly than passive or aggressive communication. It means you make your point clearly and honestly, while respecting the other person's point of view.
-            Try using ‘I’ statements instead of accusatory ‘you’ statements. For example, say "I really hate it when you don't clean up the dishes" rather than "You never help me in the kitchen".`,
-        publish_date: new Date(2020, 5, 23),
-        likes: [
-            {
-                user: 1
-            }
-        ],
-        replies: [
-            {
-                message: "This was really helpful",
-            }
-        ]
+const postSchema = new Schema({
+    title: {
+        type: String,
+        required: true,
+        minlength: 10,
+        maxlength: 50
     },
-    {
-        id: 2,
-        title: "Another Way To Love",
-        subtitle: "How to make the most of any relationships",
-        author: {
-            name: "Jon Lecun",
-            id: 1
-        },
-        body: `Assertive communication helps make your point more clearly than passive or aggressive communication. It means you make your point clearly and honestly, while respecting the other person's point of view.
-            Try using ‘I’ statements instead of accusatory ‘you’ statements. For example, say "I really hate it when you don't clean up the dishes" rather than "You never help me in the kitchen".`,
-        publish_date: new Date(2020, 5, 23),
-        likes: [
-            {
-                user: 1
-            }
-        ],
-        replies: [
-            {
-                message: "This was really helpful",
-            }
-        ]
+    subtitle: {
+        type: String,
+        minlength: 10,
+        maxlength: 50
     },
-    {
-        id: 3,
-        title: "Living your best",
-        subtitle: "5 proven strategies to become a better version of yourself",
-        author: {
-            name: "Jenny Parker",
-            id: 1
-        },
-        body: `Assertive communication helps make your point more clearly than passive or aggressive communication. It means you make your point clearly and honestly, while respecting the other person's point of view.
-            Try using ‘I’ statements instead of accusatory ‘you’ statements. For example, say "I really hate it when you don't clean up the dishes" rather than "You never help me in the kitchen".`,
-        publish_date: new Date(2020, 5, 23),
-        likes: [
-            {
-                user: 1
-            }
-        ],
-        replies: [
-            {
-                message: "This was really helpful",
-            }
-        ]
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    body: {
+        type: String
+    },
+    publish_date: {
+        type: Date,
+        default: new Date()
     }
-];
+}, { timestamps: new Date() })
+
+const Post = mongoose.model('Post', postSchema)
 
 
-module.exports = posts
+
+
+module.exports = Post
