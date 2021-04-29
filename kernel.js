@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
-const { dbUri } = require("./utils/config")
+const { dbUri, PORT } = require("./utils/config")
 
 module.exports = app =>{
     mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true})
-    .then(res => app.listen(5000, ()=>console.log("Web application started")))
+    .then(res => app.listen(PORT, ()=>console.log("Web application started at port: " + PORT)))
     .catch(err => console.log(err))
 }
