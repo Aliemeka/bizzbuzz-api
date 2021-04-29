@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan')
+const start = require('./kernel')
 
 const routes = require('./routes');
 
@@ -12,7 +13,5 @@ app.use(express.json());
  // Routes
 routes(app);
 
-app.listen(5000, ()=>{
-    console.log('Listening at port 5000');
-})
+start(app)
 
