@@ -1,8 +1,13 @@
 const express = require('express');
-const routes = require('./routes')
+const morgan = require('morgan')
+
+const routes = require('./routes');
 
 const app = express();
- app.use(express.json());
+
+// Middlewares
+app.use(morgan('dev'))
+app.use(express.json());
 
  // Routes
 routes(app);
