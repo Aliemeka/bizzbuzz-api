@@ -46,10 +46,10 @@ const posts = [
     },
     {
         id: 3,
-        title: "Another Way To Love",
-        subtitle: "How to make the most of any relationships",
+        title: "Living your best",
+        subtitle: "5 proven strategies to become a better version of yourself",
         author: {
-            name: "Jon Lecun",
+            name: "Jenny Parker",
             id: 1
         },
         body: `Assertive communication helps make your point more clearly than passive or aggressive communication. It means you make your point clearly and honestly, while respecting the other person's point of view.
@@ -67,3 +67,6 @@ const posts = [
         ]
     }
 ];
+
+
+module.exports = posts

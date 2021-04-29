@@ -1,17 +1,10 @@
 const express = require("express");
+const controllers = require("./postControllers")
 
 const router = express.Router();
 
-router.get('/', (req, res)=>{
-    res.json({
-        posts: "All the post"
-    });
-});
+router.get('/', controllers.list);
 
-router.get('/:id', (req, res)=>{
-    res.json({
-        post: "This is a post"
-    });
-});
+router.get('/:id', controllers.detail);
 
 module.exports = router;
