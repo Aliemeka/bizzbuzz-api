@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "baseUrl": "./",
+        "paths": {
+            "@middlewares/*": ["middlewares/*"],
+            "@utils/*": ["utils/*"],
+            "@posts/*": ["src/posts/*"],
+            "@users/*": ["src/users/*"],
+            "@tests/*": ["tests/*"]
+        }
+    }
+}
