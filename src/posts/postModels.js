@@ -1,17 +1,18 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+const validators = require("../../utils/validations");
+
 const Schema = mongoose.Schema
 
 const postSchema = new Schema({
     title: {
         type: String,
         required: true,
-        minlength: 10,
-        maxlength: 50
+        validate: validators.titleValidator
     },
     subtitle: {
         type: String,
-        minlength: 10,
-        maxlength: 50
+        validate: validators.subtitleValidator
     },
     author: {
         type: Schema.Types.ObjectId,
@@ -26,9 +27,27 @@ const postSchema = new Schema({
     }
 }, { timestamps: new Date() })
 
-const Post = mongoose.model('Post', postSchema)
+
+
+const ImageSchema = new Schema({
+    url: {
+        type: String,
+        required: true,
+        validate: validators.urlValidator
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    post: {
+        type: Schema.Types.ObjectId,
+        ref: 'Post'
+    }
+}, { timestamps: new Date() });
+
+const Post = mongoose.model('Post', postSchema);
+const Image = mongooose.model('Image', ImageSchema);
 
 
 
-
-module.exports = Post
+module.exports = Post;
