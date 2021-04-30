@@ -5,31 +5,19 @@ const validators = require("../../utils/validations");
 const Schema = mongoose.Schema
 
 const postSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        validate: validators.titleValidator
-    },
-    subtitle: {
-        type: String,
-        validate: validators.subtitleValidator
-    },
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
     body: {
-        type: String
+        type: String,
+        validate: validators.postValidator
     },
-    publish_date: {
-        type: Date,
-        default: new Date()
-    }
-}, { timestamps: new Date() })
+}, { timestamps: true })
 
 
 
-const ImageSchema = new Schema({
+const imageSchema = new Schema({
     url: {
         type: String,
         required: true,
@@ -43,10 +31,10 @@ const ImageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Post'
     }
-}, { timestamps: new Date() });
+}, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
-const Image = mongooose.model('Image', ImageSchema);
+exports.Image = mongooose.model('Image', imageSchema);
 
 
 
