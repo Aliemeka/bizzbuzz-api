@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const validators = require("@utils/validations");
+const validators = require("../../../utils/validations");
 
 const Schema = mongoose.Schema
 

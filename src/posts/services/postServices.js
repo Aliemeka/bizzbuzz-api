@@ -1,7 +1,13 @@
-const posts = require('../models/postModel');
+const Post = require('../models/postModel');
 
 const getAll = () =>{
-    return posts;
+    Post.find()
+        .then((res)=>{
+            return result
+        })
+        .catch((err)=>{
+            throw err
+        })
 }
 
 const findById = id =>{
