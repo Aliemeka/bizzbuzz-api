@@ -4,9 +4,9 @@ const controllers = require("../controllers/postControllers")
 const router = express.Router();
 
 // Get all post
-router.get('/', controllers.list);
+router.get('/', controllers.allPost);
 // Get a post by id
-router.get('/:postId', controllers.detail);
+router.get('/:postId', controllers.postDetail);
 // Delete a post
 router.get('/delete/:id')
 

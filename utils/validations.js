@@ -45,8 +45,7 @@ exports.nameValidator = [
 
 
 exports.emailValidator = validate({
-    validator: 'matches',
-    arguments: /^[a-zA-Z0-9.-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+    validator: 'isEmail',
     message: "Email should be valid"
 })
 

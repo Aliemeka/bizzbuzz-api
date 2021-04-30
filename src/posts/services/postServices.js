@@ -3,16 +3,15 @@ const Post = require('../models/postModel');
 const getAll = () =>{
     Post.find()
         .then((res)=>{
-            return result
+            return res
         })
         .catch((err)=>{
             throw err
         })
 }
 
-const findById = id =>{
-    const post = posts.find(post => post.id == id);
-    return post;
+const findById = async (id) =>{
+    return await Post.findById(id)
 }
 
 module.exports = { getAll, findById }

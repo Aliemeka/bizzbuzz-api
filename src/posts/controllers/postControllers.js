@@ -1,28 +1,46 @@
 const { getAll, findById } = require('../services/postServices')
+const { handleValidationErrors } = require('../../../utils/errorHandlers')
 
 // Returns all post
-exports.list = (req, res) =>{
+module.exports.allPost = (req, res) =>{
     try{
         const posts = getAll();
-        return posts.length ? (
-            res.status(200).send({ success: true, posts })
+        posts ? (
+            res.status(200).json({ success: true, posts })
         ) : (
-            res.status(404).send({ success: false, message: "No post yet"})
+            res.status(404).json({ success: false, message: "No post yet"})
         );
     }
     catch(err){
-        return res.status(500).send({ message: err })
+        const errors = handleValidationErrors(err);
+        if(Object.entries(errors).length){
+            res.status(err.code).json({ errors });
+        }
+        else{
+            res.status(500).json({ error: "Error fetching post"});
+        }
     }
 }
 
 // Returns post by id
-exports.detail = (req, res) =>{
+module.exports.postDetail = async (req, res) =>{
     try{
-        const post = findById(req.params.postId);
-        if(!post) return res.status(404).send({ success: false, message: "Post not found"});
-        return res.status(200).send({ success: true, post });
+        const post = await findById(req.params.postId);
+        if(!post) res.status(404).json({ success: false, message: "Post not found"});
+        else res.status(200).json({ success: true, post });
     }
     catch(err){
-        return res.status(500).send({ message: err })
+        const errors = handleValidationErrors(err)
+        if(Object.entries(errors).length){
+            res.status(err.code).json({ errors })
+        }
+        else{
+            res.status(500).json({ error: "Error fetching post"})
+        }
     }
+}
+
+
+module.exports.addPost = (req, res) =>{
+    res.status(201).json({ ...req.query })
 }
