@@ -1,8 +1,10 @@
 const postRoutes = require('./src/posts/routes/postRoutes')
+const authRoutes = require('./src/users/routes/authRoutes')
 
 module.exports = app =>{
     // module routes
     app.use('/posts', postRoutes);
+    app.use('/auth', authRoutes);
 
     //Default routes
     // Welcome message
