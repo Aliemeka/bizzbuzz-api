@@ -18,7 +18,7 @@ exports.list = (req, res) =>{
 // Returns post by id
 exports.detail = (req, res) =>{
     try{
-        const post = findById(req.params.id);
+        const post = findById(req.params.postId);
         if(!post) return res.status(404).send({ success: false, message: "Post not found"});
         return res.status(200).send({ success: true, post });
     }
