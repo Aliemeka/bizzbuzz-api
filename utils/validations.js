@@ -31,15 +31,15 @@ exports.replyValidator = validate({
     message: 'Post should be between {ARGS[0]} and {ARGS[1]} characters long'
 })
 
-exports.nameValidator = [
+exports.usernameValidator = [
     validate({
         validator: 'isLength',
         arguments: [3, 20],
-        message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters'
+        message: 'username should be between {ARGS[0]} and {ARGS[1]} characters'
     }),
     validate({
         validator: 'isAlphanumeric',
-        message: 'Name should contain alpha-numeric characters only',
+        message: 'username should contain alpha-numeric characters only',
       }),
 ]
 

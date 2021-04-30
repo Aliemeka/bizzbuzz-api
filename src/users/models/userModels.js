@@ -1,19 +1,21 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const validators = require('../../../utils/validations');
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
-        required: [true, 'Name is required'],
-        validate: validators.nameValidator
+        required: [true, 'Username is required'],
+        unique: [true, 'Username is already taken'],
+        validate: validators.usernameValidator
     },
     email: {
         type: String,
         required: [true, 'Email is required'],
-        unique: true,
+        unique: [true, 'Email is already taken'],
         lowercase: true,
         validate: validators.emailValidator
     },
@@ -31,6 +33,12 @@ const userSchema = new Schema({
         default: new Date()
     }
 });
+
+userSchema.pre('save', async function(next){
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+    next()
+})
 
 const User = mongoose.model('User', userSchema);
 
