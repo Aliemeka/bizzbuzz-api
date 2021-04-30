@@ -7,7 +7,7 @@ module.exports.register = async(req, res) =>{
 
     try{
         const user = await createUser(username, email, password);
-        if(user) res.status(201).json(user);
+        if(user) res.status(201).json({ id: user._id, username: user.username });
     }
     catch(err){
         const errors = handleValidationErrors(err);
