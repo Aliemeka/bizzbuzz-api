@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const { dbUri, PORT } = require("./utils/config")
+const { dbUri, PORT } = require("@utils/config")
 
 module.exports = app =>{
     mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true})

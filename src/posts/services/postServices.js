@@ -1,4 +1,4 @@
-const posts = require('./postModels');
+const posts = require('../models/postModel');
 
 const getAll = () =>{
     return posts;

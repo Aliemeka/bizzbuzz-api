@@ -1,4 +1,4 @@
-const postRoutes = require('./src/posts/postRoutes')
+const postRoutes = require('@posts/routes/postRoutes')
 
 module.exports = app =>{
     // module routes

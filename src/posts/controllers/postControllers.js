@@ -1,4 +1,4 @@
-const { getAll, findById } = require('./postServices')
+const { getAll, findById } = require('../services/postServices')
 
 exports.list = (req, res) =>{
     const posts = getAll();
