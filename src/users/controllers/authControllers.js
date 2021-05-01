@@ -1,4 +1,4 @@
-const { createUser, loginUser } = require("../services/authService");
+const { createUser, loginUser, updatePassword } = require("../services/authService");
 const { handleValidationErrors } = require('../../../utils/errorHandlers');
 
 
@@ -25,6 +25,19 @@ module.exports.login = async(req, res)=>{
     try{
         const user = await loginUser(login, password);
         res.status(201).json({ success: true, user }); 
+    }
+    catch(error){
+        res.status(400).json({ success: false, error: error.message });
+    }
+}
+
+module.exports.changePassword = async (req, res)=>{
+    const { id } = req.user;
+    const { currentPassword, newPassword } = req.body;
+
+    try{
+        const message = await updatePassword(currentPassword, newPassword, id)
+        res.status(201).json({ success: true, message })
     }
     catch(error){
         res.status(400).json({ success: false, error: error.message });

@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const { register, login } = require("../controllers/authControllers")
+const { register, login, changePassword } = require("../controllers/authControllers")
+const { requireAuth } = require("../../../middlewares/authMiddleware")
 
 const router = Router()
 
@@ -8,8 +9,8 @@ router.post('/login', login);
 // Resgister new user
 router.post('/register', register);
 // Change password
-router.get('/:id/change-password', ()=>{})
+router.post('/change-password', requireAuth, changePassword)
 // Reset password
-router.get('/reset-password', ()=>{})
+router.get('/reset-password', requireAuth, ()=>{})
 
 module.exports = router;

@@ -52,6 +52,7 @@ userSchema.statics.login = async function(login, password) {
     throw Error(`${isEmail ? 'Email' : 'Username'} is not registered`);
 }
 
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User; 
