@@ -1,11 +1,13 @@
 const User = require("../models/userModels")
-const { createToken } = require('../../../utils/auth');
+const Token = require("../models/tokenModel")
+const { createJWT, generateToken } = require('../../../utils/auth');
+const { CLIENT_URL } = require('../../../utils/config')
 const bcrypt = require('bcrypt')
 
 module.exports.createUser = async (username, email, password) =>{
     try{
        const user = await User.create({ username, email, password });
-       const token = createToken(user._id);
+       const token = createJWT(user._id);
        return { id: user._id,  username: user.username, token }
     }
     catch(err){
@@ -17,7 +19,7 @@ module.exports.createUser = async (username, email, password) =>{
 module.exports.loginUser = async (login, password) =>{
     try{
        const user = await User.login(login, password);
-       const token = createToken(user._id);
+       const token = createJWT(user._id);
        return { id: user._id,  username: user.username, token }
     }
     catch(err){
@@ -55,4 +57,28 @@ module.exports.updatePassword = async(currentPassword, newPassword, id)=>{
     }
 }
 
+module.exports.generateResetLink = async (email) =>{
+    try{
+        // Confirm the user exist
+        const user = await User.findOne({ email });
+        if(!user) throw Error("Email is does not belong to a registered user");
 
+        // Deletes existing rest token
+        const token = await Token.findOne({ userId: user._id })
+        if(token) await token.deleteOne();
+
+        // Generates new reset token and save in data base
+        const resetToken = generateToken();
+        const salt = await bcrypt.genSalt();
+        const hashedToken = await bcrypt.hash(resetToken, salt)
+        await Token.create({
+            userId: user._id,
+            token: hashedToken
+        });
+        const link = `${CLIENT_URL}/confirm-reset?token=${resetToken}`;
+        return link;
+    }
+    catch(err){
+        throw Error(err);
+    }
+} 

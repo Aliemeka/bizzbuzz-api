@@ -20,3 +20,8 @@ module.exports.requireAuth = (req, res, next) =>{
         res.sendStatus(403).json({ success: false, message: "Authorization token is required in request header"})
     }
 }
+
+
+module.exports.authorizeReset = async(req, res, next)=>{
+    next()
+}

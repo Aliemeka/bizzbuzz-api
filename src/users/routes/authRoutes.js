@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { register, login, changePassword } = require("../controllers/authControllers")
+const { register, login, changePassword, resetPassword } = require("../controllers/authControllers")
 const { requireAuth } = require("../../../middlewares/authMiddleware")
 
 const router = Router()
@@ -11,6 +11,7 @@ router.post('/register', register);
 // Change password
 router.post('/change-password', requireAuth, changePassword)
 // Reset password
-router.get('/reset-password', requireAuth, ()=>{})
+router.post('/reset-password', resetPassword)
+router.post('/confirm-reset', requireAuth, ()=>{})
 
 module.exports = router;
