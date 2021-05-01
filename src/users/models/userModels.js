@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: {
         type: String,
-        required: [true, 'Username is required'],
+        // required: [true, 'Username is required'],
         unique: [true, 'Username is already taken'],
         validate: validators.usernameValidator
     },
@@ -22,7 +22,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         minlength: 8,
-        required: [true, 'Password is required']
+        required: [true, 'Password is required'],
+        validate: validators.passwordValidator
     },
     is_active: {
         type: Boolean,
@@ -39,6 +40,17 @@ userSchema.pre('save', async function(next){
     this.password = await bcrypt.hash(this.password, salt);
     next()
 })
+
+userSchema.statics.login = async function(login, password) {
+    const isEmail = /^[^@\s]+@[^@\s\.]+\.[^@\.\s]+$/.test(login);
+    const user = isEmail ? await this.findOne({ email: login }) : await this.findOne({ username: login });
+    if(user){
+        const isAuth = await bcrypt.compare(password, user.password);
+        if(isAuth) return user;
+        throw Error('Incorrect password');
+    }
+    throw Error(`${isEmail ? 'Email' : 'Username'} is not registered`);
+}
 
 const User = mongoose.model('User', userSchema);
 

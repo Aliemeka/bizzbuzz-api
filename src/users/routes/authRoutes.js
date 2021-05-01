@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { register } = require("../controllers/authControllers")
+const { register, login } = require("../controllers/authControllers")
 
 const router = Router()
 
 // Get all post
-router.post('/login', ()=>{});
+router.post('/login', login);
 // Resgister new user
 router.post('/register', register);
 // Change password
