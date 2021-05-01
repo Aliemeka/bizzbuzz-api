@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken")
+const bcrypt = require("bcrypt")
+const Token = require("../src/users/models/tokenModel")
 
 const { SECRET } = require("../utils/config")
 
@@ -23,5 +25,17 @@ module.exports.requireAuth = (req, res, next) =>{
 
 
 module.exports.authorizeReset = async(req, res, next)=>{
-    next()
+    const {token, id} = req.query;
+    if(token){
+        const resetToken = await Token.findOne({ userId: id })
+        if(!resetToken) return res.sendStatus(403).json({ success: false, message: "Invalid or expired token"});
+        const isValid = await bcrypt.compare(token, resetToken.token)
+        if(!isValid) return res.sendStatus(403).json({ success: false, message: "Invalid or expired token"});
+        req.user = id;
+        next();
+    }
+    else{
+        res.sendStatus(403).json({ success: false, message: "Token is required"})
+    }
+    
 }

@@ -2,7 +2,8 @@ const { handleValidationErrors } = require('../../../utils/errorHandlers');
 const { createUser, 
     loginUser, 
     updatePassword, 
-    generateResetLink } = require("../services/authService");
+    generateResetLink,
+    createNewPassword } = require("../services/authService");
 
 
 module.exports.register = async(req, res) =>{
@@ -39,8 +40,8 @@ module.exports.changePassword = async (req, res)=>{
     const { currentPassword, newPassword } = req.body;
 
     try{
-        const message = await updatePassword(currentPassword, newPassword, id)
-        res.status(201).json({ success: true, message })
+        const message = await updatePassword(currentPassword, newPassword, id);
+        res.status(201).json({ success: true, message });
     }
     catch(error){
         res.status(400).json({ success: false, error: error.message });
@@ -48,13 +49,27 @@ module.exports.changePassword = async (req, res)=>{
 }
 
 module.exports.resetPassword = async (req, res)=>{
-    const { email } = req.body
+    const { email } = req.body;
 
     try{
-        const link = await generateResetLink(email)
-        res.status(200).json({ success: true, redirectUrl: link })
+        const link = await generateResetLink(email);
+        res.status(200).json({ success: true, redirectUrl: link });
     }
-    catch(errpr){
+    catch(error){
+        res.status(400).json({ success: false, error: error.message });
+    }
+}
+
+module.exports.confirmPasswordReset = async (req, res) =>{
+    const id = req.query.id;
+    const { password } = req.body;
+    console.log("Here")
+
+    try{
+        const message = await createNewPassword(password, id);
+        res.status(201).json({ success: true, message });
+    }
+    catch(error){
         res.status(400).json({ success: false, error: error.message });
     }
 }

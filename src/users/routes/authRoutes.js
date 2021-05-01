@@ -1,6 +1,11 @@
 const { Router } = require("express");
-const { register, login, changePassword, resetPassword } = require("../controllers/authControllers")
-const { requireAuth } = require("../../../middlewares/authMiddleware")
+const { requireAuth, authorizeReset } = require("../../../middlewares/authMiddleware")
+
+const { register, 
+    login, 
+    changePassword, 
+    resetPassword, 
+    confirmPasswordReset } = require("../controllers/authControllers")
 
 const router = Router()
 
@@ -12,6 +17,5 @@ router.post('/register', register);
 router.post('/change-password', requireAuth, changePassword)
 // Reset password
 router.post('/reset-password', resetPassword)
-router.post('/confirm-reset', requireAuth, ()=>{})
-
+router.post('/confirm-reset', authorizeReset, confirmPasswordReset)
 module.exports = router;

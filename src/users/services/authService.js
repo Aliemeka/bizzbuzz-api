@@ -75,10 +75,22 @@ module.exports.generateResetLink = async (email) =>{
             userId: user._id,
             token: hashedToken
         });
-        const link = `${CLIENT_URL}/confirm-reset?token=${resetToken}`;
+        const link = `${CLIENT_URL}/auth/confirm-reset?token=${resetToken}&id=${user._id}`;
         return link;
     }
     catch(err){
         throw Error(err);
     }
 } 
+
+module.exports.createNewPassword = async (password, id) =>{
+    try{
+        const user = await User.findById(id)
+        user.password = password;
+        user.save();
+        return "Password has been changed";
+    }
+    catch(err){
+        throw Error(err);
+    }
+}
