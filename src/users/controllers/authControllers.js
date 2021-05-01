@@ -15,7 +15,7 @@ module.exports.register = async(req, res) =>{
             res.status(400).json({ success: false, errors });
         }
         else{
-            res.status(500).json({ success: false, error: "Error creating user account"});
+            res.status(500).json({ success: false, error: "Error creating user" });
         }
     }
 }

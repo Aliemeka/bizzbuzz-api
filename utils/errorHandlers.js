@@ -5,5 +5,8 @@ module.exports.handleValidationErrors = error =>{
             errors[properties.path]= error.message
         });
     };
+    if(error.code === 11000){
+        errors.message = "User already exist"
+    }
     return errors;
 }
