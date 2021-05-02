@@ -26,7 +26,9 @@ const createPost = async (author, body) =>{
 
 const updatePost = async (id, body) =>{
     try{
-        const post = await Post.findByIdAndUpdate(id, { body });
+        const post = await Post.findById(id);
+        post.body = body;
+        post.save();
         return post;
     }
     catch(error){
