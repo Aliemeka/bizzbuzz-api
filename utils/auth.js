@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt")
 
 module.exports.createJWT = (id) =>{
     return jwt.sign({ id }, SECRET, {
-        expiresIn: 18000
+        expiresIn: 72000
     })
 }
 

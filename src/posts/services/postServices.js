@@ -1,17 +1,47 @@
 const Post = require('../models/postModel');
 
-const getAll = () =>{
-    Post.find()
-        .then((res)=>{
-            return res
-        })
-        .catch((err)=>{
-            throw err
-        })
+const getAllPost = async() =>{
+    try{
+        const posts = await Post.find({})
+        return posts;
+    }
+    catch(error){
+        throw error;
+    }
 }
 
-const findById = async (id) =>{
+const getPost = async (id) =>{
     return await Post.findById(id)
 }
 
-module.exports = { getAll, findById }
+const createPost = async (author, body) =>{
+    try{
+        const post = await Post.create({ author, body });
+        return post;
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+const updatePost = async (id, body) =>{
+    try{
+        const post = await Post.findByIdAndUpdate(id, { body });
+        return post;
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+
+const deletePost = async (id) =>{
+    try{
+        await Post.findByIdAndDelete(id);
+    }
+    catch(error){
+        throw error;
+    }
+}
+
+module.exports = { getAllPost, getPost, createPost, deletePost, updatePost };

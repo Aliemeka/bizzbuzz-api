@@ -6,12 +6,14 @@ const router = express.Router();
 
 // Get all post
 router.get('/', postControllers.allPost);
-// Get all post
-// router.post('/', postControllers.allPost);
+// Add all post
+router.post('/', requireAuth, postControllers.addPost);
 // Get a post by id
-router.get('/:postId', postControllers.postDetail);
+router.get('/:postId', requireAuth, postControllers.postDetail);
+//Edit a post
+router.put('/:postId', requireAuth, postControllers.editPost);
 // Delete a post
-router.get('/delete/:postId');
+router.delete('/:postId', requireAuth, postControllers.removePost);
 
 
 //Likes
