@@ -4,6 +4,7 @@ const Token = require("../src/users/models/tokenModel")
 
 const { SECRET } = require("../utils/config")
 
+// Requires thta request comes from authenticated user
 module.exports.requireAuth = (req, res, next) =>{
     const authHeader = req.headers.authorization;
     if(authHeader){
@@ -23,7 +24,7 @@ module.exports.requireAuth = (req, res, next) =>{
     }
 }
 
-
+// Authorizes reset token sent by user
 module.exports.authorizeReset = async(req, res, next)=>{
     const {token, id} = req.query;
     if(token){
