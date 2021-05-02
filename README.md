@@ -3,6 +3,9 @@
 BizzBuzz API, a makeshift social media application that allows user to create long post messages.
 
 
+## Endpoint documentation
+[BizzBuzz API Documentation on Postman](https://www.postman.com/alliemeka/workspace/37658617-666b-427c-a9ce-704252ee4bc8/documentation/9548855-b12289da-108f-4582-83e6-0ba3d2319c04 "BizzBuzz API Documentation")<br>
+
 ## Set up
 - Clone the project in your local computer
 - Enter <code>npm install</code> or <code>yarn start</code> to install all dependencies
