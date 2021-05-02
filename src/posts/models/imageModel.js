@@ -5,6 +5,11 @@ const validators = require("../../../utils/validations");
 const Schema = mongoose.Schema
 
 const imageSchema = new Schema({
+    caption: {
+        type: String,
+        minlength: 2,
+        maxlength: 50
+    },
     url: {
         type: String,
         required: true,
@@ -14,7 +19,7 @@ const imageSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    post: {
+    post: {  
         type: Schema.Types.ObjectId,
         ref: 'Post'
     }
@@ -22,4 +27,4 @@ const imageSchema = new Schema({
 
 const Image = mongooose.model('Image', imageSchema);
 
-module.exports = Image;
+module.exports = Image; 
