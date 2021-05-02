@@ -55,4 +55,4 @@ Please note we have a code of conduct, please follow it in all your interactions
 ## Pull Request Process
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a build.
 2. Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations and container parameters.
-3. Make all pull requests of new features to the **develop** branch so it can be project
+3. Make all pull requests of new features to the **develop** branch so it can be project 
