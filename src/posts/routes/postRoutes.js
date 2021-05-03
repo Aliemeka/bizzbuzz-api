@@ -1,7 +1,8 @@
 const express = require("express");
-const postControllers = require("../controllers/postControllers")
-const likeControllers = require("../controllers/likeControllers")
-const { requireAuth } = require("../../../middlewares/authMiddleware")
+const postControllers = require("../controllers/postControllers");
+const likeControllers = require("../controllers/likeControllers");
+const replyControllers = require("../controllers/replyControllers");
+const { requireAuth } = require("../../../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -19,18 +20,20 @@ router.delete('/:postId', requireAuth, postControllers.removePost);
 
 //Likes
 // Get post likes
-router.get('/:postId/likes', likeControllers.getPostLikes);
+router.get('/:postId/likes', requireAuth, likeControllers.getPostLikes);
 // add or remove like
 router.get('/:postId/like', requireAuth, likeControllers.addOrRemoveLike);
 
 //Replies
 // Get post reply
-router.get('/:postId/replies', ()=>{});
+router.get('/:postId/replies', requireAuth, replyControllers.getReplies);
 // Reply a post
-router.post('/:postId/replies', ()=>{});
+router.post('/:postId/replies', requireAuth, replyControllers.replyPost);
 // Get a reply
-router.get('/:postId/replies/:replyId', ()=>{});
+router.get('/:postId/replies/:replyId', requireAuth, replyControllers.getReply);
+// Edit a reply
+router.put('/:postId/replies/:replyId', requireAuth, replyControllers.editReply);
 // delete reply
-router.get('/:postId/replies/:replyId/delete', ()=>{});
+router.delete('/:postId/replies/:replyId', requireAuth, replyControllers.removeReply);
 
 module.exports = router;

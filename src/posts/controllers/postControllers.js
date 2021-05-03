@@ -17,7 +17,7 @@ module.exports.allPost = async (req, res) =>{
             res.status(err.code).json({ errors });
         }
         else{
-            res.status(500).json({ error: "Error fetching post"});
+            res.status(500).json({ error: "Error fetching post" });
         }
     }
 }

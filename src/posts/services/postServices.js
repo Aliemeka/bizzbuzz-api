@@ -2,7 +2,7 @@ const Post = require('../models/postModel');
 
 const getAllPost = async() =>{
     try{
-        const posts = await Post.find({});
+        const posts = await Post.find().populate("replies", "message createdAt").populate("author", "username");
         return posts;
     }
     catch(error){
