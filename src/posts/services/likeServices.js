@@ -1,5 +1,5 @@
-const Like = require("../models/likesModel")
-const Post = require("../models/postModel")
+const Like = require("../models/likesModel");
+const Post = require("../models/postModel");
 
 module.exports.createOrDeleteLike = async(postId, userId) =>{
     try{
@@ -7,7 +7,7 @@ module.exports.createOrDeleteLike = async(postId, userId) =>{
         if(like){
             like.delete();
             await Post.findByIdAndUpdate(postId, {$pull: { likes: like.id }});
-            return "unliked"
+            return "unliked";
         }
         else{
             const newLike = await Like.create({ post: postId, user: userId });
@@ -18,7 +18,7 @@ module.exports.createOrDeleteLike = async(postId, userId) =>{
         }
     }
     catch(error){
-        throw error
+        throw error;
     }
 }
 
