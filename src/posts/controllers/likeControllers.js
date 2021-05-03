@@ -27,7 +27,7 @@ module.exports.addOrRemoveLike = async (req, res) =>{
 }
 
 // Get the likes of a post
-module.exports.addOrRemoveLike = async (req, res) =>{
+module.exports.getPostLikes = async (req, res) =>{
     const { postId } = req.params;
 
     try{

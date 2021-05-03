@@ -19,7 +19,7 @@ router.delete('/:postId', requireAuth, postControllers.removePost);
 
 //Likes
 // Get post likes
-router.get('/:postId/likes', ()=>{});
+router.get('/:postId/likes', likeControllers.getPostLikes);
 // add or remove like
 router.get('/:postId/like', requireAuth, likeControllers.addOrRemoveLike);
 
