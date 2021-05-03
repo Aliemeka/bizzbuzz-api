@@ -1,5 +1,6 @@
 const express = require("express");
 const postControllers = require("../controllers/postControllers")
+const likeControllers = require("../controllers/likeControllers")
 const { requireAuth } = require("../../../middlewares/authMiddleware")
 
 const router = express.Router();
@@ -20,7 +21,7 @@ router.delete('/:postId', requireAuth, postControllers.removePost);
 // Get post likes
 router.get('/:postId/likes', ()=>{});
 // add or remove like
-router.post('/:postId/like', ()=>{});
+router.get('/:postId/like', requireAuth, likeControllers.addOrRemoveLike);
 
 //Replies
 // Get post reply

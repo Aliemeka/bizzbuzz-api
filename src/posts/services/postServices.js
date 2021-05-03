@@ -2,7 +2,7 @@ const Post = require('../models/postModel');
 
 const getAllPost = async() =>{
     try{
-        const posts = await Post.find({})
+        const posts = await Post.find({});
         return posts;
     }
     catch(error){
@@ -11,7 +11,7 @@ const getAllPost = async() =>{
 }
 
 const getPost = async (id) =>{
-    return await Post.findById(id)
+    return await Post.findById(id);
 }
 
 const createPost = async (author, body) =>{

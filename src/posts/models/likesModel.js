@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const likeSchema = new Schema({
-    author: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'User'
     },

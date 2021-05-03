@@ -13,6 +13,18 @@ const postSchema = new Schema({
         type: String,
         validate: validators.postValidator
     },
+    likes: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Like"
+        }
+    ],
+    replies: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Reply" 
+        }
+    ]
 }, { timestamps: true });
 
 const Post = mongoose.model('Post', postSchema);
