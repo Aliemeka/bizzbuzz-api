@@ -5,7 +5,13 @@ const { createUser,
     generateResetLink,
     createNewPassword } = require("../services/authService");
 
-
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res
+ * 
+ * Register a new user using {@link login}
+ */
 module.exports.register = async(req, res) =>{
     const { username, email, password } = req.body;
 
@@ -24,6 +30,13 @@ module.exports.register = async(req, res) =>{
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * 
+ * 
+ */
 module.exports.login = async(req, res)=>{
     const { login, password } = req.body;
     try{
@@ -35,6 +48,14 @@ module.exports.login = async(req, res)=>{
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * 
+ * Changes user's password
+ * 
+ */
 module.exports.changePassword = async (req, res)=>{
     const { id } = req.user;
     const { currentPassword, newPassword } = req.body;
@@ -48,6 +69,13 @@ module.exports.changePassword = async (req, res)=>{
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * 
+ * Generates a link to reset the password
+ */
 module.exports.resetPassword = async (req, res)=>{
     const { email } = req.body;
 
@@ -60,10 +88,16 @@ module.exports.resetPassword = async (req, res)=>{
     }
 }
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * 
+ * Confirms the reset link and restes the users password
+ */
 module.exports.confirmPasswordReset = async (req, res) =>{
     const id = req.query.id;
     const { password } = req.body;
-    console.log("Here")
 
     try{
         const message = await createNewPassword(password, id);
