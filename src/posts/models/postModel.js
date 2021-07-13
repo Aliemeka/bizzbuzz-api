@@ -4,29 +4,32 @@ const validators = require("../../../utils/validations");
 
 const Schema = mongoose.Schema;
 
-const postSchema = new Schema({
+const postSchema = new Schema(
+  {
     author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     body: {
-        type: String,
-        validate: validators.postValidator
+      type: String,
+      validate: validators.postValidator,
     },
     likes: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Like"
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Like",
+      },
     ],
     _replies: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "Reply" 
-        }
-    ]
-}, { timestamps: true });
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Reply",
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.model("Post", postSchema);
 
 module.exports = Post;
