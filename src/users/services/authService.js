@@ -11,7 +11,7 @@ module.exports.createUser = async (username, email, password) => {
     const token = createJWT(user._id);
     const message = "Welcome to BizzBuzz!";
     const url = `${CLIENT_URL}/accounts/${user.id}`;
-    sendMail(email, message, "View profile", url);
+    await sendMail(email, message, "View profile", url);
     return { id: user._id, username: user.username, token };
   } catch (err) {
     throw err;
@@ -77,7 +77,7 @@ module.exports.generateResetLink = async (email) => {
     const link = `${CLIENT_URL}/auth/confirm-reset?token=${resetToken}&id=${user._id}`;
     const message =
       "You just requested to reset your password. You can ignore if it wasn't you or else click the button below to reset your password";
-    sendMail(email, message, "Reset password", link);
+    await sendMail(email, message, "Reset password", link);
     return link;
   } catch (err) {
     throw Error(err);
